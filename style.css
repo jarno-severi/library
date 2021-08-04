@@ -1,0 +1,40 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+}
+
+input[type=text] {
+    width: 100%;
+}
+
+input[type=checkbox] {
+    height: 18px;
+    width: 18px;
+}
+
+label, input {
+    margin: 0 0 4px 4px;
+}
+
+#submit {
+    margin: 4px 0 0 4px;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 12px 0 12px 4px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    border: gray 1px solid;
+    white-space: pre-wrap;
+    padding: 4px;
+    width: 200px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
