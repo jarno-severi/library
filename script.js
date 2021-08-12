@@ -108,3 +108,9 @@ const inputAuthor = document.querySelector('input[name="author"');
 const inputPages = document.querySelector('input[name="pages"');
 const inputRead = document.querySelector('input[name="read"');
 const container = document.querySelector('.container');
+
+const addBookButton = document.querySelector('#submit');
+addBookButton.addEventListener('click', addBookToLibrary);
+
+const clearInputs = document.querySelector('#clear');
+clearInputs.addEventListener('click', resetForm);
