@@ -9,23 +9,26 @@
 </head>
 
 <body>
-  <div class="popup">
-    <div id="form" hidden>
-      <form id="add-book">
-        <label for="title">Title:</label>
-        <input type="text" name="title">
-        <label for="author">Author:</label>
-        <input type="text" name="author">
-        <label for="pages">Pages:</label>
-        <input type="text" name="pages">
-        <label for="read">Read (/rɛd/):</label>
+  <nav>
+    <div class="popup">
+      <div id="form" hidden>
+        <form id="add-book">
+          <label for="title">Title:</label>
+          <input type="text" name="title" >
+          <label for="author">Author:</label>
+          <input type="text" name="author">
+          <label for="pages">Pages:</label>
+          <input type="text" name="pages">
+        </form>
+        <label for="read" class="checkbox">Read (/rɛd/):</label>
         <input type="checkbox" name="read" id="read">
-      </form>
-      <div id="submit">Add Book</div>
-      <div id="close-button">Close</div>
+        <div id="submit">Add Book</div>
+        <div id="close-button">Close</div>
+      </div>
     </div>
-    <div id="open-button"><img src="library.png" alt="books" height="128px" width="128px"></div>
-  </div>
+    <div class="welcome">Welcome to your library <br>Add your favorite books >></div>
+    <div id="open-button"><img src="books.png" alt="books" height="96px" width="96px"></div>
+  </nav>
   <div class="container"></div>
 </body>
 
