@@ -1,3 +1,15 @@
+function toggleForm () {
+    const element = document.querySelector('#form');
+    element.toggleAttribute('hidden');
+    openForm.toggleAttribute('hidden');
+}
+
+const openForm = document.querySelector('#open-button');
+openForm.addEventListener('click', toggleForm);
+
+const closeForm = document.querySelector('#close-button')
+closeForm.addEventListener('click', toggleForm);
+
 // Funtions section
 function Book(index, title, author, pages, read) {
     this.index = index;
@@ -12,48 +24,84 @@ Book.prototype.info = function () {
     else return `${this.title}\nby ${this.author}\n\nPages: ${this.pages}\n\nYou have not read this book.`
 }
 
-// Get values from form inputs
-let title = () => inputTitle.value;
-let author = () => inputAuthor.value;
-let pages = () => inputPages.value;
-let read = () => inputRead.checked;
+Book.prototype.toggleRead = function () {
+    if (this.read === false) return this.read = true;
+    if (this.read === true) return this.read = false;
+}
 
 let index = 0; // Counter for added books
 
 function addBookToLibrary() {
 
-    let book = new Book(index, title(), author(), pages(), read());
+    let book = new Book (
+        index, 
+        inputTitle.value, 
+        inputAuthor.value, 
+        inputPages.value, 
+        inputRead.checked
+        );
+
     index++;
     myLibrary.push(book); // Push book object to "library" (array)
 
-    createCard(); // Creates a div for the book info
-    const firstDiv = container.lastChild;  // Selects just created div
-    firstDiv.textContent = book.info(); // Add book info into this div
+    // Creates a div for the book info
+    let div = document.createElement('div');
+    div.classList.add('card');
+    container.appendChild(div);
+
+    // Select newly created card
+    const card = container.lastChild;  
+
+    // Add book info into this div
+    card.textContent = book.info(); 
 
     // Bind book index to this div to be able to removed by the user
-    firstDiv.setAttribute('data-index', book.index);
+    card.setAttribute('data-index', book.index);
 
-    // Create remove button for the book and add click listener
-    createButton(firstDiv);
-    const button = firstDiv.querySelector('button');
-    button.addEventListener('click', removeBook);
+    // Create read button for the book
+    const readBtn = document.createElement('BUTTON');
+    readBtn.textContent = "Read this book";
+    readBtn.classList.add('read');
+    card.appendChild(readBtn);
 
+    // Add evenlistener for the read button
+    const buttonRead = card.querySelector('.read');
+    buttonRead.addEventListener('click', toggleRead);
+
+    // Create remove button for the book
+    const removeBtn = document.createElement('BUTTON');
+    removeBtn.textContent = "Remove this book";
+    removeBtn.classList.add('remove');
+    card.appendChild(removeBtn);
+
+    // Add evenlistener for the remove button
+    const buttonRemove = card.querySelector('.remove');
+    buttonRemove.addEventListener('click', removeBook);
+    
+    resetForm();
 }
-
 
 // Creates a div element for book info
 function createCard() {
-
     let div = document.createElement('div');
     div.classList.add('card');
     container.appendChild(div);
 }
 
 
-function removeBook() {
+function removeBook () {
     let bookIndex = this.parentNode.dataset.index;
     let pos = myLibrary.map(obj => obj.index).indexOf(+bookIndex);
     myLibrary.splice(pos, 1);
+    clearCards();
+    myLibrary.forEach(book => createCards(book));
+}
+
+function toggleRead () {
+    let bookIndex = this.parentNode.dataset.index;
+    let pos = myLibrary.map(obj => obj.index).indexOf(+bookIndex);
+    console.log(pos);
+    myLibrary[pos].toggleRead();
     clearCards();
     myLibrary.forEach(book => createCards(book));
 }
@@ -67,37 +115,31 @@ function createCards(book) {
     const firstDiv = container.lastChild; // Select newly added div
     firstDiv.textContent = book.info(); // Adds book info into created div
     firstDiv.setAttribute('data-index', book.index);
-    createButton(firstDiv);
-    const button = firstDiv.querySelector('button');
-    button.addEventListener('click', removeBook);
+
+    let readBtn = document.createElement('BUTTON');
+    readBtn.textContent = "Read this book";
+    readBtn.classList.add('read');
+    firstDiv.appendChild(readBtn);
+
+    const read = firstDiv.querySelector('.read');
+    read.addEventListener('click', toggleRead);
+
+    let removeBtn = document.createElement('BUTTON');
+    removeBtn.textContent = "Remove this book";
+    removeBtn.classList.add('remove');
+    firstDiv.appendChild(removeBtn);
+
+    const remove = firstDiv.querySelector('.remove');
+    remove.addEventListener('click', removeBook);
 }
 
-
-function createButton(element) {
-    let button = document.createElement('BUTTON');
-    button.textContent = "Remove this book";
-    button.classList.add('remove');
-    element.appendChild(button);
+function resetForm () {
+    document.querySelector('#add-book').reset();
 }
-
-const resetForm = () => document.querySelector('#add-book').reset();
 
 function clearCards() {
-
     while (container.firstChild) container.removeChild(container.lastChild);
 }
-
-// Inactive funtions
-
-
-/* function showAdd() {
-
-    const message = document.querySelector('#log');
-    message.textContent = "Book added!"
-    setTimeout(() => {
-        message.textContent = "";
-    }, 2000);
-} */
 
 // Library
 let myLibrary = [];
@@ -111,6 +153,3 @@ const container = document.querySelector('.container');
 
 const addBookButton = document.querySelector('#submit');
 addBookButton.addEventListener('click', addBookToLibrary);
-
-const clearInputs = document.querySelector('#clear');
-clearInputs.addEventListener('click', resetForm);
