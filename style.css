@@ -3,8 +3,8 @@ input[type=text] {
 }
 
 input[type=checkbox] {
-    height: 18px;
-    width: 18px;
+    height: 19px;
+    width: 19px;
 }
 
 #checkbox {
@@ -12,7 +12,7 @@ input[type=checkbox] {
 }
 
 label, input {
-    margin: 0 4px 4px 4px;
+    margin: 1px 4px 4px 4px;
 }
 
 #submit {
@@ -34,62 +34,70 @@ label, input {
     cursor: default;
     border-radius: 5px;
     border: 1px solid gray;
+    background: #d3a15f;
 }
 
 #close-button:hover {
-    background: #d3a15f;
+    background: rgba(255, 0, 0, 0.4);
 }
 
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    margin: 12px 0 12px 4px;
+    margin-top: 6px;
+    justify-content: center;
 }
 
 .card {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     border-radius: 6px;
     border: gray 1px solid;
     white-space: pre-wrap;
     padding: 4px;
-    width: 200px;
-    margin-right: 12px;
-    margin-bottom: 12px;
+    width: 164px;
+    margin: 6px 4px 6px 4px;
+    /* margin-right: 8px; */
+    /* margin-bottom: 12px; */
     line-height: 2;
-    background-image: url("mark.svg");
+    /* background-image: url("mark.svg");
     background-position: right top;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
     
 }
 
 .popup {
     position: absolute;
-    top: 108px;
+    top: 105px;
     right: 8px;
     background: burlywood;
+    border: solid;
+    border-width: 0 1px 1px 1px;
 }
 
 #open-button {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 9px;
+    right: 9px;
     background: burlywood;
+    padding: 0 8px 0 8px;
 }
 
 #open-button:hover {
     background: #d3a15f;
-
 }
 
 nav {
-    height: 100px;
+    height: 96px;
     background: burlywood;
+    display: flex;
+    border: black solid 1px;
 }
 
 #form {
-    width: 360px;
+    width: 300px;
     background: burlywood;
 }
 
@@ -99,8 +107,11 @@ nav {
 }
 
 .welcome {
-    font-size: 24px;
-    line-height: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    line-height: 2;
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 8px;
 }
